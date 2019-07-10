@@ -19,6 +19,18 @@ var topic = ["ford","honda","toyota","nissan","pontiac","buick"];
 
 for(i = 0; i < topic.length; i++){
     $("#buttonContainer").append("<button>" + topic[i] + "</button>")
+    $("button").on("click", function() {
+        console.log("this button works!")
+        var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + topic + "&api_key=W6x4R780WwYgHtCIOLJvDK8tSrt1C4rt&limit=10";
+
+        $.ajax({
+            url: queryURL,
+            method: "GET"
+        })
+            .then(function(response){
+                console.log(response.data)
+            })
+    })
 }
 
 
