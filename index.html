@@ -4,25 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Car button!</title>
+    <title>Car button</title>
 
 </head>
 <body>
-    <button data-cars="cars">Vroooooooooom</button>
+    <div id="buttonContainer"></div>
     <div id="gifContainer"></div>
     
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>"></script>
 <script type="text/javascript">
 
-var cars = ["ford","honda","toyota","nissan","pontiac","buick"];
+var topic = ["ford","honda","toyota","nissan","pontiac","buick"];
+
+for(i = 0; i < topic.length; i++){
+    $("#buttonContainer").append("<button>" + topic + "</button>")
+}
 
 
-
-
-
-    $("button").on("click", function (){
-
-    })
 </script>
 </html>

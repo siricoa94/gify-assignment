@@ -21,8 +21,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script type="text/javascript">
     $("button").on("click", function() {
-      var car = $(this).attr("cars");
-      var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + car + "&api_key=W6x4R780WwYgHtCIOLJvDK8tSrt1C4rt&limit=10";
+      var topic = $(this).attr("cars");
+      var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + topic + "&api_key=W6x4R780WwYgHtCIOLJvDK8tSrt1C4rt&limit=10";
 
       $.ajax({
         url: queryURL,
