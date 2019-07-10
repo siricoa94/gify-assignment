@@ -4,37 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>SpongeBob Giffy!</title>
+    <title>Car button!</title>
 
 </head>
 <body>
-    <button data-cartoon="spongebob">Square Pants</button>
-    <button data-cartoon="batman">Duh na nuh na nuh na nuh na</button>
-    <button data-cartoon="mightyMouse">More might than mickey</button>
+    <button data-cars="cars">Vroooooooooom</button>
     <div id="gifContainer"></div>
     
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>"></script>
 <script type="text/javascript">
+
+var cars = ["ford","honda","toyota","nissan","pontiac","buick"];
+
+
+
+
+
     $("button").on("click", function (){
-        var cartoon = $(this).attr("data-cartoon");
-        var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=UVZUlA10LefG8pdvgxpyunUVTcTJ9siz&q=spongebob&limit=25&offset=0&rating=G&lang=en";
-            $.ajax({
-            url: queryURL,
-            method: "GET"
-            
-            })
-            .then(function(response){
-
-
-                console.log(response);
-
-            });
-        
-        
 
     })
-
-    
 </script>
 </html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Cars</title>
+</head>
+
+<body>
+  <div id="buttons">
+
+    <button cars="mustang">Mustang</button>
+    <button cars="pontiac">Pontiac</button>
+    <button cars="ferari">Ferari</button>
+
+  </div>
+
+  <div id="gifs-appear-here">
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script type="text/javascript">
+    $("button").on("click", function() {
+      var car = $(this).attr("cars");
+      var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + car + "&api_key=W6x4R780WwYgHtCIOLJvDK8tSrt1C4rt&limit=10";
+
+      $.ajax({
+        url: queryURL,
+        method: "GET"
+      })
+        .then(function(response) {
+          console.log(response.data)
+          var results = response.data;
+
+          for (var i = 0; i < results.length; i++) {
+            var gifDiv = $("<div>");
+
+            var rating = results[i].rating;
+
+            var p = $("<p>").text("Rating: " + rating);
+
+            var carImage = $("<img>");
+            carImage.attr("src", results[i].images.fixed_height.url);
+
+            gifDiv.prepend(p);
+            gifDiv.prepend(carImage);
+
+            $("#gifs-appear-here").prepend(gifDiv);
+          }
+        });
+    });
+  </script>
+</body>
+
+</html>
