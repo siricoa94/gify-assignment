@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,31 +8,37 @@
     <title>Car button</title>
 
 </head>
+
 <body>
     <div id="buttonContainer"></div>
     <div id="gifContainer"></div>
-    
+
 </body>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script></script>
 <script type="text/javascript">
+    var topic = ["tesla", "buick", "jeep", "ferari"];
 
-var topic = ["ford","honda","toyota","nissan","pontiac","buick"];
-
-for(i = 0; i < topic.length; i++){
-    $("#buttonContainer").append("<button>" + topic[i] + "</button>")
-    $("button").on("click", function() {
+    for (var i = 0; i < topic.length; i++) {
+        var topics = topic[i];
+        $("#buttonContainer").append("<button "+"id="+ topic[i] +">" + topic[i] + "</button>");
+        
+        $("button").on("click", function () {
+            var  id = $(this).attr("id")
+            console.log(id)
         console.log("this button works!")
-        var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + topic + "&api_key=W6x4R780WwYgHtCIOLJvDK8tSrt1C4rt&limit=10";
+        var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + id +
+            "&api_key=W6x4R780WwYgHtCIOLJvDK8tSrt1C4rt&limit=10";
+        console.log(queryURL)
 
         $.ajax({
-            url: queryURL,
-            method: "GET"
-        })
-            .then(function(response){
+                url: queryURL,
+                method: "GET"
+            })
+            .then(function (response) {
                 console.log(response.data)
                 var results = response.data;
 
-                for (var i = 0; i < results.length; i++){
+                for (var i = 0; i < results.length; i++) {
                     var gifContainer = $("<div>");
                     var rating = results[i].rating;
                     var p = $("<p>").text("Rating: " + rating);
@@ -45,8 +52,8 @@ for(i = 0; i < topic.length; i++){
                 }
             })
     })
-}
-
+    }
 
 </script>
+
 </html>
