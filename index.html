@@ -14,45 +14,75 @@
     <div id="gifContainer"></div>
 
 </body>
+<!-- link to to jquery library -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script></script>
+<!-- sets text type in script to javascript -->
 <script type="text/javascript">
+// created variable topic to store array of strings to be made into buttons
     var topic = ["tesla", "buick", "jeep", "ferari"];
-
+// for loop runs the length of the array, appending a button with the value of each array to the button container
     for (var i = 0; i < topic.length; i++) {
         var topics = topic[i];
         $("#buttonContainer").append("<button "+"id="+ topic[i] +">" + topic[i] + "</button>");
-        
+        // on click sets variable id to the value of the button id stored above
         $("button").on("click", function () {
             var  id = $(this).attr("id")
             console.log(id)
         console.log("this button works!")
+// created variable queryURL to store api information with id information in order to generate the search based on the button clicked
         var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + id +
             "&api_key=W6x4R780WwYgHtCIOLJvDK8tSrt1C4rt&limit=10";
         console.log(queryURL)
-
+// method to get data about queryURL from api.
         $.ajax({
                 url: queryURL,
                 method: "GET"
             })
+// function to store data retrieved
             .then(function (response) {
                 console.log(response.data)
                 var results = response.data;
-
+                // for loop to run the length of the results retrieved from the api
                 for (var i = 0; i < results.length; i++) {
+                    // setting variable gifContainer to a div
                     var gifContainer = $("<div>");
+                    // variable rating equals the rating of each resulting image.
                     var rating = results[i].rating;
+                    // adds the text of the rating to the <p> tag
                     var p = $("<p>").text("Rating: " + rating);
-
+                    //sets the variable carImage to <img> 
                     var carImage = $("<img>");
-                    carImage.attr("src", results[i].images.original_still.url);
+                    // gives the attribute of the fixed image generated to carImage
+                    carImage.attr("src", results[i].images.fixed_height_still.url);
+                    // in saving this variables, i was attempting to use them below to switch the image value on click from the still version, to the original.
+                    
+                    var data = ("src", results[i].images.fixed_height_still.url);
+                    
 
+                    // adds the rating of the image and the image to the gifContainer variable, which is then prepended to the #gifContainer
                     gifContainer.prepend(p);
                     gifContainer.prepend(carImage)
                     $("#gifContainer").prepend(gifContainer);
+                    
+                    // here i am attempting to create an on click function for the images, in which it will change the state from still to its original version
+                    $("img").on("click", function(){
+                        var state = $(this).attr("data");
+                        if(carImage.attr("src", results[i].images.fixed_height_still.url)){
+                            carImage.attr("src", results[i].images.fixed_height.url);
+
+                        }
+                        else{
+                            carImage.attr("src", results[i].images.fixed_height_still.url)
+                        }
+
+                    })
+                    
+                    
                 }
             })
     })
     }
+    
 
 </script>
 
